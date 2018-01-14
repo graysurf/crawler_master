@@ -1,0 +1,184 @@
+{
+  "desc":"edit this file for a new task",
+  "task": {
+    "desc": "Task name.",
+    "value": "eu_sleeping"
+  },
+  "db": {
+    "desc": "Setting up task's source of data. This allows accessing data for comparison and storing collected data. ",
+    "db_name": {
+      "value": 124,
+      "desc": "Set the task to access the specified database"
+    },
+    "dataset_label": {
+      "value": [],
+      "desc": "Set the task to crawl specified dataset with specified label"
+    }
+  },
+  "crawler": {
+    "desc": "set crawlers' scope of work",
+    "crawler_job": {
+      "desc": "Define crawler's job target",
+      "job_type": {
+        "value": "mapping",
+        "option": [
+          "mapping",
+          "crawl"
+        ],
+        "desc": "Define crawler's job type"
+      },
+      "job_mission": {
+        "value": "email",
+        "option": {
+          "mapping": [
+            "email",
+            "phone"
+          ],
+          "crawl": [
+            "about",
+            "like",
+            "friend"
+          ]
+        },
+        "desc": "Define crawler's job content"
+      }
+    },
+    "crawler_class": {
+      "value": "A",
+      "option": [
+        "A",
+        "B",
+        "PreB",
+        "C",
+        "D"
+      ],
+      "desc": "Set crawler's class to run this task. Job type 'Mapping' default is class D crawlers, 'Crawl' default is class B crawlers."
+    },
+    "crawler_status_for_crawling": {
+      "value": [
+        "ok",
+        "broken_search"
+      ],
+      "option": [
+        "ok",
+        "broken_search",
+        "complete"
+      ],
+      "desc": "Filter the available crawler's status to participate task. 'Status' means crawler's health satus. 'ok' means crawler success to complete job mission last time. 'broken_search' means crawler with the invalid mapping problem last time. 'complete' means crawler is healthy, but task is complete last time."
+    },
+    "crawler_amount": {
+      "new": {
+        "value": 100,
+        "desc": "set the number of crawlers which are new product and never used for crawl task before"
+      },
+      "ok": {
+        "value": 0,
+        "desc": "set the number of crawlers which last crawler status is 'ok'. Status 'ok' means crawler complete the mission last time"
+      },
+      "broken_search": {
+        "value": 0,
+        "desc": "last execution was blocked by facebook"
+      },
+      "desc": "deploy the number of crawlers with different crawler status to participate this task"
+    },
+    "crawl_times": {
+      "value": 90,
+      "desc": "Set crawler's crawl times per mission. Mapping generally is 90 times per mission. Crawl generally is unlimit, it always set 999999 times."
+    },
+    "break_time": {
+      "value": "PT1H",
+      "desc": "the time which crawler should be break the specify time after crawl mission."
+    },
+    "assigned_crawler_id": {
+      "value": [
+        1,
+        2,
+        3
+      ],
+      "desc": "(option) assign specified crawler IDs for this task. Default is system choose the availabe crawler to execute the mission."
+    },
+    "consecutive_fail_times_to_check_mapping_function": {
+      "value": 5,
+      "desc": "set the number of consecutive times which crawler can not mapping successful."
+    }
+  },
+  "vm": {
+    "desc": "set virtual machine's resource",
+    "region": {
+      "value": "asia-east1",
+      "option": [
+        "asia-east1",
+        "asia-northeast1",
+        "europe-west1",
+        "us-central1",
+        "us-east1",
+        "us-west1"
+      ],
+      "desc": "Set crawlers to deploy on which region of virtual machines"
+    },
+    "min_vm_num": {
+      "value": 1,
+      "desc": "Refer to auto scaling function. Set minimum of instances in this task."
+    },
+    "max_vm_num": {
+      "value": 5,
+      "desc": "Refer to auto scaling function. Set maximum of instances in this task."
+    },
+    "cores": {
+      "value": 1,
+      "default": 1,
+      "desc": "Set the number of cores in a virtual machine. Minimum is 1 vCPU"
+    },
+    "memory": {
+      "value": 1,
+      "default": 1,
+      "desc": "Set the size of memory in a virtual machine. Minimum 900[MB]"
+    }
+  },
+  "container": {
+    "desc": "Set the container resouce in the virtual machine",
+    "image": {
+      "value": "gcr.io/crawler-1383/fbcrawler:prod",
+      "default": "gcr.io/crawler-1383/fbcrawler:prod",
+      "desc": "Set the container registry path of image."
+    },
+    "cores": {
+      "value": 1,
+      "desc": "Set the number of core in a container."
+    },
+    "memory": {
+      "value": 1,
+      "default": {
+        "mapping": 1,
+        "crawl": 2
+      },
+      "desc": "Set the size of memory in a container [MB]."
+    }
+  },
+  "additional_conf": {
+    "crawler": {
+      "value": {},
+      "desc": "additional crawl setting, json.file"
+    },
+    "env": {
+      "value": "product",
+      "option": [
+        "product",
+        "develop"
+      ]
+    },
+    "branch": {
+      "value": "master",
+      "desc": ""
+    },
+    "secret_key": {
+      "value": "",
+      "desc": ""
+    },
+    "create_user": {
+      "value": "Justin",
+      "desc": ""
+    },
+    "desc": "Additional function for task. It supports json. file to elastic set crawler, env, branch, secret_key, user etc,."
+  }
+}
